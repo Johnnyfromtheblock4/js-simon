@@ -45,15 +45,38 @@ const numbersAnswer = document.querySelectorAll(
 ); //risposte
 const message = document.getElementById(`message`); //messaggio
 
-// Aggiungo l'event listener al bottone
+//aggiungo l'event listener al bottone
 button.addEventListener("click", function (event) {
   // Prevengo il refresh della pagina
   event.preventDefault();
 
-  // Converto i valori inseriti in numeri
+  //converto i valori inseriti in numeri
   const userAnswers = [];
   for (let i = 0; i < numbersAnswer.length; i++) {
     userAnswers.push(parseInt(numbersAnswer[i].value));
   }
 
+  //verifico quali numeri sono corretti
+  let correctCount = 0;
+  const correctNumbers = [];
+
+  for (let i = 0; i < userAnswers.length; i++) {
+    if (userAnswers[i] === numbersGenerated[i]) {
+      correctCount++;
+      correctNumbers.push(userAnswers[i]);
+    }
+  }
+
+  //mostro il risultato nel messaggio
+  if (correctCount === numbersGenerated.length) {
+    message.innerText = `Complimenti, hai indovinato tutti i ${correctCount} numeri: ${correctNumbers.join(
+      ", "
+    )}!`;
+  } else if (correctCount > 0) {
+    message.innerText = `Hai indovinato ${correctCount} numeri: ${correctNumbers.join(
+      ", "
+    )}. Ritenta!`;
+  } else {
+    message.innerText = `Nessun numero indovinato. Ritenta!`;
+  }
 });
