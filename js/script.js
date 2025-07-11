@@ -4,7 +4,7 @@ const numbersList = document.getElementById(`numbers-list`);
 //genero i 5 numeri casuali
 let numbersGenerated = [];
 
-for (let i = 0; i < 6; i++) {
+for (let i = 0; i < 5; i++) {
   let randomNumber = parseInt(Math.random() * 50) + 1;
   numbersGenerated.push(randomNumber);
   numbersList.innerHTML += `<li>${randomNumber}</li>`;
@@ -25,7 +25,7 @@ const interval = setInterval(() => {
     clearInterval(interval);
 
     //faccio sparire i numeri
-    numbersList.classList.add = "d-none";
+    numbersList.classList.add("d-none");
 
     //faccio apparire i numeri da inserire
     answerForm.innerText = document
@@ -38,6 +38,18 @@ const interval = setInterval(() => {
   seconds--;
 }, 1000);
 
-//mostro le risposte
+//controllo le risposte al click
+const button = document.getElementById(`btn`); //bottone
+const numbersAnswer = document.querySelectorAll("number"); //risposte
+const message = document.getElementById(`message`); //messaggio
 
-//document.getElementById("answers-form").classList.remove("d-none");
+button.addEventListener(`click`, function (event) {
+  //tolgo il refresh della pagina
+  event.preventDefault();
+  //condizione if
+  if (numbersAnswer === numbersGenerated) {
+    message = `Complimenti, tutte le risposte sono corrette!`;
+  } else {
+    message = `Ritenta, sarai più fortunato!`;
+  }
+});
