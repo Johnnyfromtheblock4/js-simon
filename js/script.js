@@ -39,17 +39,21 @@ const interval = setInterval(() => {
 }, 1000);
 
 //controllo le risposte al click
-const button = document.getElementById(`btn`); //bottone
-const numbersAnswer = document.querySelectorAll("number"); //risposte
+const button = document.querySelector("#answers-form button"); //bottone
+const numbersAnswer = document.querySelectorAll(
+  '#answers-form input[type="number"]'
+); //risposte
 const message = document.getElementById(`message`); //messaggio
 
-button.addEventListener(`click`, function (event) {
-  //tolgo il refresh della pagina
+// Aggiungo l'event listener al bottone
+button.addEventListener("click", function (event) {
+  // Prevengo il refresh della pagina
   event.preventDefault();
-  //condizione if
-  if (numbersAnswer === numbersGenerated) {
-    message = `Complimenti, tutte le risposte sono corrette!`;
-  } else {
-    message = `Ritenta, sarai più fortunato!`;
+
+  // Converto i valori inseriti in numeri
+  const userAnswers = [];
+  for (let i = 0; i < numbersAnswer.length; i++) {
+    userAnswers.push(parseInt(numbersAnswer[i].value));
   }
+
 });
